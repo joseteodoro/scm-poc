@@ -1,6 +1,18 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const { updateActor, listAll, getStreak } = require('../controllers/actors');
+const { downstream } = require('./downstream');
 
-// Routes related to actor.
+router.get('/', function (req, res, next) {
+    downstream(res)(controller.listAll());
+});
+
+router.put('/', function (req, res, next) {
+    downstream(res)(controller.updateActor(req.body));
+});
+
+router.get('/streak', function (req, res, next) {
+    downstream(res)(controller.getStreak());
+});
 
 module.exports = router;
