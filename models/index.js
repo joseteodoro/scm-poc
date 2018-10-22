@@ -1,20 +1,20 @@
+const CONFLICT = 409;
+
 const eventsModel = {
-    CONFLICT: 409,
+    CONFLICT,
     listAll: () => ({}),
     add: (event) => ({}),
     listAllByActor: (id) => ({}),
     truncate: () => ({})
-}
+};
 
 const actorsModel = {
-    CONFLICT: 409,
     listAll: () => ({}),
     update: (actor) => ({}),
-    listAllByActor: (id) => ({}),
-    truncate: () => ({})
-}
+    streak: () => ({})
+};
 
 module.exports = {
     eventsModel,
-    actorsModel: null
-}
+    actorsModel
+};

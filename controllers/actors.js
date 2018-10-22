@@ -3,13 +3,9 @@ const { actorsModel } = require('models')
 
 const formatActors = (content, status) => ({status, content})
 
-const formatActorsWithStatus = status => content => formatEvents(content, status)
+const formatActorsWithStatus = status => content => formatActors(content, status)
 
 const serverError = ({message, status = 500}) => Promise.reject(Object.assign(new Error(message), status))
-
-const notFound = actorId => ({status: 404, message: `Could not found actor with id:${actorId}`});
-
-const couldFindActor = actorId => events => events && events.length ? events : Promise.reject(notFound(actorId))
 
 var listAll = () => actorsModel.listAll()
     .then(formatActorsWithStatus(200))
@@ -17,11 +13,11 @@ var listAll = () => actorsModel.listAll()
 
 var updateActor = actor => actorsModel.update(actor)
     .then(formatActorsWithStatus(200))
-    .catch(formatError(event));
+    .catch(serverError);
 
-var getStreak = () => eventsModel.streak()
+var getStreak = () => actorsModel.streak()
     .then(formatActorsWithStatus(200))
-    .catch(formatError({}));
+    .catch(serverError);
 
 module.exports = {
 	updateActor,
