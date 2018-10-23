@@ -13,7 +13,6 @@ const dir = './test/data/';
 const testFolder = './test/data';
 let testCaseNames = fs.readFileSync(dir + 'description.txt', 'utf8').toString().split('\n');
 
-
 describe('git_test ', function() {
 	this.timeout(120*1000);
 

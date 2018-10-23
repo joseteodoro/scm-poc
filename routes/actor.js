@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { updateActor, listAll, getStreak } = require('../controllers/actors');
+const controller = require('../controllers/actors');
 const { downstream } = require('./downstream');
 
 router.get('/', function (req, res, next) {

@@ -5,13 +5,15 @@ const formatEvents = (content, status) => ({status, content})
 
 const formatEventsWithStatus = status => content => formatEvents(content, status)
 
-const serverError = ({message, status = 500}) => Object.assign(new Error(message), status)
+const serverError = ({message, status = 500}) => ({message, status})
 
 const conflict = id => serverError({status: 409, message: `Event with id:${id} already exists.`})
 
-const formatError = ({id}) => err => err.errorCode === eventsModel.CONFLICT
+const formatError = ({id}) => err => {
+   return err.errorCode ===  409
     ? Promise.reject(conflict(id))
     : Promise.reject(serverError(err));
+}
 
 const notFound = actorId => ({status: 404, message: `Could not found actor with id:${actorId}`});
 
@@ -29,7 +31,7 @@ const getByActor = id => eventsModel.listAllByActor(id)
     .catch(formatError({}))
     .then(couldFindActor(id))
     .then(formatEventsWithStatus(200));
-        
+
 const eraseAllEvents = () => eventsModel.truncate()
     .then(formatEventsWithStatus(200))
     .catch(formatError({}));

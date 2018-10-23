@@ -5,7 +5,7 @@ const formatActors = (content, status) => ({status, content})
 
 const formatActorsWithStatus = status => content => formatActors(content, status)
 
-const serverError = ({message, status = 500}) => Promise.reject(Object.assign(new Error(message), status))
+const serverError = ({message, status = 500}) => Promise.reject({message, status})
 
 var listAll = () => actorsModel.listAll()
     .then(formatActorsWithStatus(200))
