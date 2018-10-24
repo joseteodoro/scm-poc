@@ -5,6 +5,7 @@ const config = require('config/')
 let db;
 
 const connect = async () => {
+    // keep database name on the config file, so we can customize that
     const filename = config.databaseFilename
     if (db) {
         return Promise.resolve(db);
@@ -27,6 +28,11 @@ const execute = async (sql) => connect()
     // .then(debug(sql))
     .then( db => db.exec(sql))
 
+
+/*
+    I would like to use another kind of database like couch or a more robust db like mysql.
+    But, since it's not a requirement on the project I will keep it simple! XD
+*/
 function Database () {
     this.db = connect()
     this.migrate = migrate

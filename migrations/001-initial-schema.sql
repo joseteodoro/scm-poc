@@ -1,20 +1,20 @@
 -- Up
 
-CREATE TABLE Actor (
+CREATE TABLE IF NOT EXISTS Actor (
     id INTEGER NOT NULL,
     login TEXT NOT NULL,
     avatar_url TEXT,
     CONSTRAINT Actor_PK PRIMARY KEY (id)
 );
 
-CREATE TABLE Repo (
+CREATE TABLE IF NOT EXISTS Repo (
     id INTEGER NOT NULL,
     name TEXT,
     url TEXT NOT NULL,
     CONSTRAINT Repo_PK PRIMARY KEY (id)
 );
 
-CREATE TABLE Event (
+CREATE TABLE IF NOT EXISTS Event (
     id INTEGER NOT NULL,
     "type" TEXT NOT NULL,
     created_at INTEGER NOT NULL,

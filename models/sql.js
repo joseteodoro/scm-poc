@@ -21,9 +21,11 @@ const streakSql = () => `select a.*, COUNT(e.id) from Actor as a, Event as e
     GROUP by a.id
     ORDER by COUNT(e.id) DESC`
 
+const formatDay = timestamp => moment(timestamp).startOf('day').valueOf()/100000
+
 const insertEventSql = ({id, type, created_at, actor, repo}) => `INSERT INTO Event 
 (id, "type", created_at, actor_id, repo_id, created_day) 
-VALUES(${id}, '${type}', ${moment(created_at).valueOf()}, ${actor.id}, ${repo.id}, ${moment(created_at).startOf('day').valueOf()})`
+VALUES(${id}, '${type}', ${moment(created_at).valueOf()}, ${actor.id}, ${repo.id}, ${formatDay(created_at)})`
 
 const insertActorSql = ({id, login , avatar_url}) => `INSERT INTO Actor  
 (id, login, avatar_url) VALUES(${id}, '${login}', '${avatar_url}')`

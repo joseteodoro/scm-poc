@@ -6,9 +6,10 @@ const formatActors = actors => actors.map(formatActor)
 
 const formatRepo = ({ repo_id, name, url  }) => ({id: repo_id, name, url})
 
-const formatEvent = ({ id, type, created_at, actor_id, repo_id, login, avatar_url, name, url }) => ({
+const formatEvent = ({ id, type, created_at, actor_id, repo_id, login, avatar_url, name, url, created_day }) => ({
     id,
     type,
+    created_day: created_day,
     created_at: created_at ? moment(created_at).format('YYYY-MM-DD HH:mm:ss') : '',
     actor: formatActor({actor_id, login, avatar_url}),
     repo: formatRepo({repo_id, name, url})
