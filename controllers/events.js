@@ -1,13 +1,13 @@
-require('rootpath')()
-const { eventsModel } = require('models')
+require('rootpath')();
+const { eventsModel } = require('models');
 
-const formatEvents = (content, status) => ({status, content})
+const formatEvents = (content, status) => ({status, content});
 
-const formatEventsWithStatus = status => content => formatEvents(content, status)
+const formatEventsWithStatus = status => content => formatEvents(content, status);
 
-const serverError = ({message, status = 500}) => ({message, status})
+const serverError = ({message, status = 500}) => ({message, status});
 
-const conflict = id => serverError({status: 409, message: `Event with id:${id} already exists.`})
+const conflict = id => serverError({status: 409, message: `Event with id:${id} already exists.`});
 
 const formatError = ({id}) => err => {
    return err.errorCode ===  409
@@ -17,7 +17,7 @@ const formatError = ({id}) => err => {
 
 const notFound = actorId => ({status: 404, message: `Could not found actor with id:${actorId}`});
 
-const couldFindActor = actorId => events => events && events.length ? events : Promise.reject(notFound(actorId))
+const couldFindActor = actorId => events => events && events.length ? events : Promise.reject(notFound(actorId));
 
 const addEvent = event => eventsModel.add(event)
     .then(formatEventsWithStatus(201))
@@ -29,9 +29,9 @@ const fieldRemover = ({ id, type, created_at, actor, repo}) => ({
     created_at,
     actor, 
     repo
-})
+});
 
-const removeUncessaryInfo = events => events.map(fieldRemover)
+const removeUncessaryInfo = events => events.map(fieldRemover);
 
 const listAll = () => eventsModel.listAll()
     .then(removeUncessaryInfo)
@@ -54,20 +54,3 @@ module.exports = {
 	getByActor,
 	eraseAllEvents
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

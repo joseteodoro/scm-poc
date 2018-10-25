@@ -1,6 +1,6 @@
-require('rootpath')()
-const sqlite = require('sqlite')
-const config = require('config/')
+require('rootpath')();
+const sqlite = require('sqlite');
+const config = require('config/');
 
 let db;
 
@@ -13,20 +13,18 @@ const connect = async () => {
     db = sqlite.open(filename);
 
     return Promise.resolve(db);
-}
+};
 
 const migrate = async () => connect()
     .then(db => db.migrate({ force: 'last' }))
-    .catch(console.error) //be lenient about existent tables
+    .catch(console.error); //be lenient about existent tables
 
 const query = async (sql) => connect()
-    // .then(debug(sql))
     .then(db => db.all(sql))
-    .catch(console.error)
+    .catch(console.error);
 
 const execute = async (sql) => connect()
-    // .then(debug(sql))
-    .then( db => db.exec(sql))
+    .then( db => db.exec(sql));
 
 /*
     I would like to use another kind of database like couch or a more robust db like mysql.
@@ -41,6 +39,6 @@ function Database () {
     this.query = query
     this.execute = execute
     return this
-}
+};
 
-module.exports = new Database()
+module.exports = new Database();

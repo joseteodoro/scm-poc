@@ -30,7 +30,23 @@ describe('controllers/events suite', function () {
     it('should list actions by actor properly', async function () {
         sandbox.stub(eventsModel, 'listAllByActor').resolves([{id: 1}, {id: 2}])
         const events = await getByActor(1002)
-        expect(events).to.be.deep.equal({status: 200, content: [{id: 1}, {id: 2}]})
+        const expectedContent = {
+            status: 200, content: [{
+                "actor": undefined,
+                "created_at": undefined,
+                    "id": 1,
+                "repo": undefined,
+                "type": undefined,
+            },
+            {
+                "actor": undefined,
+                "created_at": undefined,
+                "id": 2,
+                "repo": undefined,
+                "type": undefined,
+            }
+        ]}
+        expect(events).to.be.deep.equal(expectedContent)
     })
     it('should manage the error properly if get no result back', async function () {
         sandbox.stub(eventsModel, 'listAllByActor').resolves([])
@@ -38,8 +54,24 @@ describe('controllers/events suite', function () {
     })
     it('should list all properly', async function () {
         sandbox.stub(eventsModel, 'listAll').resolves([{id: 1}, {id: 2}])
+        const expectedContent = {
+            status: 200, content: [{
+                "actor": undefined,
+                "created_at": undefined,
+                    "id": 1,
+                "repo": undefined,
+                "type": undefined,
+            },
+            {
+                "actor": undefined,
+                "created_at": undefined,
+                "id": 2,
+                "repo": undefined,
+                "type": undefined,
+            }
+        ]}
         const events = await listAll()
-        expect(events).to.be.deep.equal({status: 200, content: [{id: 1}, {id: 2}]})
+        expect(events).to.be.deep.equal(expectedContent)
     })
     it('should manage the error if failing when listing all events', async function () {
         sandbox.stub(eventsModel, 'listAll').rejects({message: 'Could not find the database.'})

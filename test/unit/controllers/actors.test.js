@@ -9,7 +9,7 @@ chai.use(sinonChai);
 chai.should();
 const expect = chai.expect;
 
-describe.only('controllers/events suite', function () {
+describe('controllers/actors suite', function () {
 
     beforeEach(() => {
         sandbox = sinon.createSandbox()

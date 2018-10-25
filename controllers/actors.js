@@ -1,11 +1,11 @@
-require('rootpath')()
-const { actorsModel } = require('models')
+require('rootpath')();
+const { actorsModel } = require('models');
 
-const formatActors = (content, status) => ({status, content})
+const formatActors = (content, status) => ({status, content});
 
-const formatActorsWithStatus = status => content => formatActors(content, status)
+const formatActorsWithStatus = status => content => formatActors(content, status);
 
-const serverError = ({message, status = 500}) => Promise.reject({message, status})
+const serverError = ({message, status = 500}) => Promise.reject({message, status});
 
 var listAll = () => actorsModel.listAll()
     .then(formatActorsWithStatus(200))
@@ -24,19 +24,3 @@ module.exports = {
 	listAll,
 	getStreak
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
