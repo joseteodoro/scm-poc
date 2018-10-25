@@ -27,12 +27,19 @@ describe.only('controllers/streak', () => {
         const computed = await streak.sortedStreak(events)
         expect(computed).to.be.deep.equal(expected)
     })
-    it.only('when data is large, should sort the streak properly', async () => {
+    it('when data is large, should sort the streak properly', async () => {
         const contents = fs.readFileSync('test/unit/controllers/data/events-large.json', 'utf8')
         const events = JSON.parse(contents)
         const expectedContent = fs.readFileSync('test/unit/controllers/data/expected-streak-large.json', 'utf8')
         const expected = JSON.parse(expectedContent)
-        // const events = await eventsModel.listAll()
+        const computed = await streak.sortedStreak(events)
+        expect(computed).to.be.deep.equal(expected)
+    })
+    it.only('when load http5.json, should sort the streak properly', async () => {
+        const contents = fs.readFileSync('test/unit/controllers/data/events-http05.json', 'utf8')
+        const events = JSON.parse(contents)
+        const expectedContent = fs.readFileSync('test/unit/controllers/data/expected-http05.json', 'utf8')
+        const expected = JSON.parse(expectedContent)
         const computed = await streak.sortedStreak(events)
         expect(computed).to.be.deep.equal(expected)
     })

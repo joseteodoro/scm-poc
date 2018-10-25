@@ -54,7 +54,7 @@ const streak = events => {
         return formatStreak(lastEvent, 0)
     }
     const sorted = prepareEvents(events)
-    const lastEvent = sorted[0]
+    const lastEvent = sorted.slice(-1).pop()
     const days = sorted.map(mapByCreated_day)
     const accs = days.map(accDays(days))
     const streaks = groupContigousDays(accs)
