@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const controller = require('../controllers/actors');
+const streakController = require('../controllers/streak');
 const { downstream } = require('./downstream');
 
 router.get('/', function (req, res, next) {
@@ -12,7 +13,7 @@ router.put('/', function (req, res, next) {
 });
 
 router.get('/streak', function (req, res, next) {
-    downstream(res)(controller.getStreak());
+    downstream(res)(streakController.streakForAllEvents());
 });
 
 module.exports = router;
