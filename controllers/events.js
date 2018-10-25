@@ -22,14 +22,26 @@ const couldFindActor = actorId => events => events && events.length ? events : P
 const addEvent = event => eventsModel.add(event)
     .then(formatEventsWithStatus(201))
     .catch(formatError(event));
-        
+
+const fieldRemover = ({ id, type, created_at, actor, repo}) => ({
+    id,
+    type,
+    created_at,
+    actor, 
+    repo
+})
+
+const removeUncessaryInfo = events => events.map(fieldRemover)
+
 const listAll = () => eventsModel.listAll()
+    .then(removeUncessaryInfo)
     .then(formatEventsWithStatus(200))
     .catch(formatError({}));
 
 const getByActor = id => eventsModel.listAllByActor(id)
     .catch(formatError({}))
     .then(couldFindActor(id))
+    .then(removeUncessaryInfo)
     .then(formatEventsWithStatus(200));
 
 const eraseAllEvents = () => eventsModel.truncate()

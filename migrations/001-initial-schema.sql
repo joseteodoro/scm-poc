@@ -20,7 +20,6 @@ CREATE TABLE IF NOT EXISTS Event (
     created_at INTEGER NOT NULL,
     actor_id INTEGER NOT NULL,
     repo_id INTEGER NOT NULL,
-    created_day INTEGER NOT NULL,
     CONSTRAINT Event_PK PRIMARY KEY (id),
     CONSTRAINT Event_Repo_FK FOREIGN KEY (repo_id) REFERENCES Repo(id), 
     CONSTRAINT Event_Actor_FK FOREIGN KEY (actor_id) REFERENCES Actor(id)

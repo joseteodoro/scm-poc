@@ -28,10 +28,12 @@ const execute = async (sql) => connect()
     // .then(debug(sql))
     .then( db => db.exec(sql))
 
-
 /*
     I would like to use another kind of database like couch or a more robust db like mysql.
     But, since it's not a requirement on the project I will keep it simple! XD
+
+    For some reason, Sqlite is droping the database everytime it runs the migration. I
+    kept the migration turned-on for tests and the app for awhile.
 */
 function Database () {
     this.db = connect()
