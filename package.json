@@ -7,7 +7,7 @@
     "start": "node ./bin/www",
     "pretest": "npm install",
     "test": "node migrate.js && ./node_modules/.bin/mocha test",
-    "test:unit": "./node_modules/.bin/mocha test"
+    "test:unit": "./node_modules/.bin/mocha test/unit/*"
   },
   "dependencies": {
     "bluebird": "^3.5.0",

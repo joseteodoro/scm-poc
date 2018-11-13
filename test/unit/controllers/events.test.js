@@ -2,11 +2,14 @@ require('rootpath')();
 const chai = require('chai');
 const sinon = require('sinon');
 const sinonChai = require('sinon-chai');
+const chaiAsPromised = require('chai-as-promised');
 const {	listAll, addEvent, getByActor, eraseAllEvents } = require('controllers/events');
 const {	eventsModel } = require('models');
 
 chai.use(sinonChai);
 chai.should();
+chai.use(chaiAsPromised);
+
 const expect = chai.expect;
 
 describe('controllers/events suite', function () {
